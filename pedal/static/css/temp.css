@@ -1,0 +1,34 @@
+body {
+    background-image: url(http://cache1.bigcartel.com/theme_images/2578379/pedalbg.jpg);
+    background-repeat: repeat;
+}
+
+html {
+       min-height: 100%;
+}
+
+#temp {
+    margin: 0 auto;
+    text-align: center;
+    width: 662px;
+}
+#temp .text {
+    margin-top: 20px;
+}
+#temp .issue {
+    margin-top: 10px;
+    margin-left: 60px;
+    width: 530px;
+    height: 320px;
+    overflow: hidden;
+}
+#temp .text .brev {
+    color: white;
+}
+#temp a {
+    color: black;
+    text-decoration: underline;
+}
+#temp .text form {
+    margin-top: 10px;
+}
