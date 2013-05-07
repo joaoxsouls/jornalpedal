@@ -1,0 +1,7 @@
+django==1.4.5
+south
+psycopg2
+bpython
+PIL
+django-imagekit
+raven
