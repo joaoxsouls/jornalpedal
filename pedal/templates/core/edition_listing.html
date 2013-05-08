@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% block title%}
+- {{ category }}
+{% endblock %}
+
+{% block content %}
+
+<div class="news">
+  <h2 class="title">{% trans 'Editions' %}</h2>
+  {% for edition in editionlist %}
+  {% if not forloop.counter|divisibleby:2 %}
+  <div class="row edition-detail">
+    {% endif %}
+    <div class="span4">
+      <a href="{% url editions:reader_edition edition.number%}"><img src="{{ edition.thumbnail.url }}" ></a>
+      <h5 class="title">#{{ edition.number }} - {{ edition.get_month_display }} - <a href="{% url editions:reader_edition edition.number%}">{% trans 'read online' %} </a> - <a href="{{ edition.file.url }}">{% trans 'download' %}</a></h5>
+    </div>
+    {% if forloop.counter|divisibleby:2 or forloop.last %}
+  </div>
+  {% endif %}
+  {% endfor %}
+  <div class="row">
+    <div class="span3 offset3 ">
+      <span class="step-links">
+        {% if editionlist.has_previous %}
+        <a href="{% url editions:edition_listing %}?p={{ editionlist.previous_page_number }}">{% trans 'previous page' %}</a>
+        {% endif %}
+        <span class="current">
+          {% trans 'page' %} {{ editionlist.number }} {% trans 'of' %} {{ editionlist.paginator.num_pages }}.
+        </span>
+
+        {% if editionlist.has_next %}
+        <a href="{% url editions:edition_listing %}?p={{ editionlist.next_page_number }}">{% trans 'next page' %}</a>
+        {% endif %}
+      </span>
+    </div>
+  </div>
+</div>
+{% endblock %}

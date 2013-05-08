@@ -1,0 +1,52 @@
+{% load static from staticfiles %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    {% include "core/scripts.html" %}
+    <title>{% trans 'Pedal Newspaper' %}{% block title %}{% endblock %}</title>
+{% include "core/ga.html" %}
+  </head>
+  <body class="home">
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=331161773651828";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+    {% include "nav.html" %}
+    <div id="content" class="content">
+      <div class="container wrapper">
+        <div class="row">
+        <div class="span8">
+          <div Class="row">
+            <div class="span8" id="content-span">
+              {% block content %}{% endblock%}
+            </div>
+          </div>
+        </div>
+        <div class="span4">
+          <div class="row">
+            <div class="span4 edition">
+              <img src="{{ edition.thumbnail.url }}" >
+              <div class="text">
+                <h6>#{{ edition.number }} {{ edition.get_month_display }} - <a href="{{ edition.file.url }}"><u>{% trans 'download' %}</u></a></h6>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span4 aid">
+              <img src="{{ aid.image.url }}" alt="{% trans aid.name %}">
+            </div>
+          </div>
+        </div>
+      </div>
+        {% include "core/footer.html" %}
+      </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

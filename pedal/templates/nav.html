@@ -1,0 +1,65 @@
+{% load static from staticfiles %}
+{% load i18n %}
+{% load category_tags %}
+{% trans 'texts' as ttexts %}
+{% trans 'articles' as tarticles %}
+{% trans 'events' as tevents %}
+{% trans 'multimedia' as tmultimedia %}
+{% block nav %}
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="{% url core:home %}">
+              <img alt="pedal logo" src="{% static 'img/logo.png' %}">
+            </a>
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <div class="nav-collapse collapse nav-menu">
+              <ul class="nav">
+                {% category_list as categories %}
+                {% for category in categories %}
+                <li>
+                  <a href="{% url core:post_listing category.slug %}">{{category.title}}</a>
+                </li>
+                {% endfor %}
+
+                <!-- <li  {% if selected == "editions" %} class="active" {% endif %}> -->
+                <!--   <a href="{% url editions:edition_listing %}">{% trans 'editions' %}</a></li> -->
+                <!-- <li  {% if selected == ttexts %} class="active" {% endif %}> -->
+                <!--   <a href="{% url core:post_listing ttexts  %}">{% trans 'texts' %}</a></li> -->
+                <!-- <li {% if selected == tarticles %} class="active" {% endif %}> -->
+                <!--   <a href="{% url core:post_listing tarticles  %}">{% trans 'articles' %}</a></li> -->
+                <!-- <li {% if selected == tevents %} class="active" {% endif %}> -->
+                <!--   <a href="{% url core:post_listing tevents  %}">{% trans 'events' %}</a></li> -->
+                <!-- <li  {% if selected == tmultimedia %} class="active" {% endif %}> -->
+                <!--   <a href="{% url core:post_listing tmultimedia  %}">{% trans 'multimedia' %}</a></li> -->
+                <!-- <li  {% if selected == "about" %} class="active" {% endif %}> -->
+                <!--   <a href="{% url core:about %}">Pedal</a></li> -->
+                <!-- <li  {% if selected == "shop" %} class="active" {% endif %}> -->
+                <!-- <a href="{% url core:shop %}">{% trans 'shop' %}</a></li> -->
+                {% if user.is_active and user.is_staff %}
+                <li  {% if selected == "admin" %} class="active" {% endif %}><a href="{% url admin:index %}">Admin</a></li>
+                <li>
+                  <div id="user-tools">
+                    {% trans 'Welcome,' %}<br>
+                    <strong>{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</strong>.
+                    {% block userlinks %}
+                    <a href="{% url admin:password_change %}">{% trans 'Change password' %}</a> /
+                    <a href="{% url admin:logout %}">{% trans 'Log out' %}</a>
+                    {% endblock %}
+                  </div>
+                </li>
+                {% endif %}
+              </ul>
+              <form class="navbar-search pull-left {% if user.is_active and user.is_staff %} admin{% endif %}" method="get" action="/pesquisa" >
+                <input type="text" class="search-query" name="q" placeholder="{% trans 'search' %}">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

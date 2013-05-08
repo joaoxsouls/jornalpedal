@@ -1,0 +1,74 @@
+{% load url from future %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css" />
+        <link rel="icon" type="image/png" href="{{ STATIC_URL }}/favicon.png" />
+        {% block extrastyle %}{% endblock %}
+        {% block extrahead %}{% endblock %}
+        {% block blockbots %}
+        <meta name="robots" content="NONE,NOARCHIVE" />
+        {% endblock %}
+    </head>
+    {% load i18n %}
+    <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" id="admin-body">
+      {% if not is_popup %}
+      {% if user.is_active and user.is_staff %}
+      {% include "nav.html" with selected="admin" %}
+        {% endif %}
+
+        {% endif %}
+
+        {% block userlinks %}{% endblock %}
+
+        {% block mainbody %}
+        <div class="main {% block coltype %}colM{% endblock %}">
+
+            {% if messages %}
+            <div class="alert alert-success">
+                <ul class="messagelist">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% block breadcrumbs %}
+            <ul class="breadcrumb">
+                <li><a href="/">{% trans 'Home' %}</a> <span class="divider">/</span></li>
+                <li class="active">{% if title %} {{ title }}{% endif %}</li>
+            </ul>
+            {% endblock %}
+
+            {% block pretitle %}{% endblock %}
+            {% block content_title %}
+                {% if title %}
+                <div class="page-header">
+                    <h3>{{ title }}</h3>
+                </div>
+                {% endif %}
+            {% endblock %}
+            <div class="row-fluid show-grid">
+                <div class="span9">
+                    {% block content %}
+                        {% block object-tools %}{% endblock %}
+                        {{ content }}
+                    {% endblock %}
+                </div>
+                <div class="span3">
+                    {% block sidebar %}{% endblock %}
+                </div>
+            </div>
+
+            {% block footer %}{% endblock %}
+        </div>
+        {% endblock %}
+    </body>
+</html>

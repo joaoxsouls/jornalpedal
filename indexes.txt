@@ -1,0 +1,2 @@
+CREATE INDEX post_search_idx ON core_post USING gin(to_tsvector('portuguese', COALESCE(title,'') || '' || COALESCE(content, '') ));
+explain select * from core_post where to_tsvector('portuguese', ( COALESCE(title,'') || '' || COALESCE(content, '') ) ) @@ plainto_tsquery('portuguese', 'lucky basterds');

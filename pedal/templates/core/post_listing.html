@@ -1,0 +1,35 @@
+{% extends "core/base.html" %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% block title%}
+- {{category}}
+{% endblock %}
+
+{% block content %}
+
+<div class="news">
+  <h2 class="title">{{ category }}</h2>
+  {% block results %}{% endblock %}
+  {% for post in postlist %}
+  {% if not forloop.counter|divisibleby:2 %}
+  <div class="row post">
+  {% endif %}
+    <div class="span4">
+      <a href="{% url core:post_detail post.category post.slug %}"><img src="{{ post.thumbnail_image }}" ></a>
+      <a href="{% url core:post_detail post.category post.slug %}"><h3 class="title">{{ post.title }}</h3></a>
+      <span class="post-date">
+        {{post.pub_date}}
+      </span>
+      <p class="sinopse">{{ post.sinopse }}<br>
+        <a href="{% url core:post_detail post.category post.slug %}">{% trans 'More' %}</a>
+      </p>
+    </div>
+    {% if forloop.counter|divisibleby:2 or forloop.last %}
+  </div>
+  {% endif %}
+  {% endfor %}
+  <div class="row">
+    {% block pagination%}{% endblock%}
+  </div>
+</div>
+{% endblock %}

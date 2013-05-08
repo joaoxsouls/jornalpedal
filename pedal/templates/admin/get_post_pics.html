@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="{{ STATIC_URL }}admin/css/pics_slideshow.css">
+<title>Select image to insert</title>
+</head>
+<body>
+  <div id="container">
+    {% if not images %}
+    <h1>No Images added, please add Images to Post </h1>
+    {% endif%}
+    <div id="pictures">
+      <div class="slides_container">
+        {% for url, id, width in images %}
+        <a href="#" target="_blank"><img src="{{ url }}" style="max-width:366px; ,m ax-height: 274px;" alt="img-{{ id }}"></a>
+        {% endfor %}
+      </div>
+      {% if images%}
+      <ul class="pagination">
+        {% for url, id in minis %}
+        <li><a href="#"><img src="{{ url }}" class="" alt="img-{{ id }}" /></a></li> 
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.js"></script>
+<script src="{{ STATIC_URL }}admin/js/slides.min.jquery.js"></script>  
+<script>
+  $(function() {
+  $('#pictures').slides({
+  preload: true,
+  preloadImage: '{{ STATIC_URL }}admin/img/loading.gif',
+  effect: 'slide, fade',
+  crossfade: true,
+  slideSpeed: 350,
+  fadeSpeed: 500,
+  generateNextPrev: false,
+  generatePagination: false
+  })
+  $('.slides_container a').on('click', function(e){
+  window.opener.CKEDITOR.tools.callFunction( 2, e.target.src);
+  window.close();
+  return false;
+  });
+  });
+</script>
+</html>

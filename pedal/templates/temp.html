@@ -1,0 +1,32 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}" media="all" />
+    <link rel="stylesheet" href="{% static "css/temp.css" %}" media="all" />
+    <meta charset=utf-8 />
+    <title>Jornal Pedal</title>
+{% include "core/ga.html" %}
+  </head>
+  <body>
+    <div id="temp">
+      <a href="http://www.facebook.com/JornalPedal"><img src="{% static "img/pedaltemp.png" %}"  alt="logo pedal"></a>
+      <div class="text">
+        <h3 class="brev">Website brevemente online</h3>
+        <a href="http://www.jornalpedal.bigcartel.com"><h3>Loja pedal</h3></a>
+        <a href="https://www.dropbox.com/s/kfuncmrp3lltke7/PED%2310.pdf"><h3>Download - Número Quinze, Abril</h3></a>
+      </div>
+      <div class="issue">
+        <div data-configid="0/2257753" style="width: 525px; height: 336px;" class="issuuembed"></div><script type="text/javascript" src="//e.issuu.com/embed.js" async="true"></script>
+      </div>
+      <div class="text">
+        <h4>Mailing List</h4>
+        <form class="form-search validate" action="http://tumbrl.us4.list-manage.com/subscribe/post?u=a256184f111f65170ca3f1fa0&amp;id=924fc3e4cb" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+          <input type="text" class="input-medium search-query" name="EMAIL">
+          <button type="submit" class="btn btn-inverse">Subscrever</button>
+        </form>
+        <h3><a href="https://www.facebook.com/JornalPedal">Facebook</a> <a href="https://twitter.com/jornalpedal">  Twitter  </a></h3>
+      </div>
+    </div>
+  </body>
+</html>

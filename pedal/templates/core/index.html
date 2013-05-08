@@ -1,0 +1,50 @@
+{% extends "core/base.html" %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% block title%}
+- home
+{% endblock %}
+
+{% block content %}
+
+<div id="home-carousel" class="carousel slide">
+<script type="text/javascript">
+        $('.carousel').carousel({
+                        interval: 4000
+        })
+</script>
+  <div class="carousel-inner">
+    {% for post in carousel %}
+    <div class="item {% if forloop.first %} active {% endif %}">
+      <a href="{% url core:post_detail post.category post.slug %}"><img src="{{ post.carousel_image }}" alt="" /></a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="social home">
+  <div class="fb-like" data-href="http://www.facebook.com/jornalpedal" data-send="true" data-layout="button_count" data-width="200" data-show-faces="false"></div>
+  <a href="https://twitter.com/jornalpedal" class="twitter-follow-button" data-show-count="false" data-lang="pt" data-show-screen-name="false">Seguir @jornalpedal</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+<div class="news">
+  <h2 class="title">{% trans 'news' %}</h2>
+  {% for post in postlist %}
+  {% if not forloop.counter|divisibleby:2 %}
+  <div class="row post">
+  {% endif %}
+    <div class="span4">
+      <a href="{% url core:post_detail post.category post.slug %}"><img src="{{ post.thumbnail_image }}" ></a>
+      <a href="{% url core:post_detail post.category post.slug %}"><h3 class="title">{{ post.title }}</h3></a>
+      <span class="post-date">
+        {{ post.pub_date }}
+      </span>
+      <p class="sinopse">{{ post.sinopse }}<br>
+        <a href="{% url core:post_detail post.category post.slug %}">{% trans 'More' %}</a>
+      </p>
+    </div>
+    {% if forloop.counter|divisibleby:2 %}
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

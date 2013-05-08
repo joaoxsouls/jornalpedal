@@ -1,0 +1,34 @@
+{% load static from staticfiles %}
+{% load i18n %}
+<div class="row">
+  <div class="span12 footer">
+    <div class="row">
+      <div class="span2 offset5 content">
+        <h1><img alt="pedal losango" src="{% static "img/pedalfooter.png" %}"></h1>
+      </div>
+      <div class="row">
+        <div class="span4 offset4">
+            <h6 class="info">{% trans 'contact' %} / {% trans 'distribution' %} / {% trans 'ads' %}</h6>
+        </div>
+      </div>
+      <div class="span4 offset4">
+        <div class="row licenses">
+          <div class="span2">
+            {% trans 'code licensed under' %} <a href="http://opensource.org/licenses/MIT">{% trans 'MIT license' %}</a><br/>
+            <span id="github-btn" class="github-btn github-forks">
+              <a id="gh-btn" href="https://github.com/markdotto/github-buttons/" target="_blank" class="gh-btn">
+                <span class="gh-ico"></span>
+                <span id="gh-text" class="gh-text">Fork</span>
+              </a>
+              <a id="gh-count" href="https://github.com/markdotto/github-buttons/network" target="_blank" class="gh-count">67</a>
+            </span>
+          </div>
+          <div class="span2">
+            {% trans 'content licensed under' %} <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">{% trans 'CC-BY-NC license' %}</a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" class="cc" src="{{STATIC_URL}}img/80x15.png" /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

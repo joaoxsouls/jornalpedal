@@ -1,0 +1,23 @@
+{% extends "core/post_listing.html" %}
+{% load i18n %}
+{% block results %}
+<h2 class="title">{% trans 'results' %}</h2>
+<h3 class="search-terms">{% trans 'search query' %}: {{search_terms}}</h3>
+{% endblock %}
+{% block pagination%}
+    <div class="span3 offset3 ">
+        <span class="step-links">
+        {% if postlist.has_previous %}
+        <a href="{% url core:search %}?q={{ query }}&p={{ paginator.previous_page_number }}">{% trans 'previous page' %}</a>
+        {% endif %}
+        <span class="current">
+          {% if postlist %}
+          {% trans 'page' %} {{ page_obj.number }} {% trans 'of' %} {{ paginator.num_pages }}
+          {% else %}{% trans 'no results match your query' %}{% endif %}
+        </span>
+        {% if page_obj.has_next %}
+        <a href="{% url core:search %}?q={{ query }}&p={{ paginator.next_page_number }}">{% trans 'next page' %}</a>
+        {% endif %}
+    </span>
+    </div>
+{% endblock%}
