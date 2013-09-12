@@ -46,7 +46,7 @@ class HomeView(SideBarContentMixin, TemplateView):
         ctx['postlist'] = Post.objects.filter(images__highlight=True).order_by('-pub_date').prefetch_related('images').select_related('category', 'user')[:6]
         for post in ctx['postlist']:
             post.thumbnail_image = post.images.all()[0].thumbnail.url
-            return ctx
+        return ctx
 
 
 class PostDetailView(SideBarContentMixin, DetailView):
