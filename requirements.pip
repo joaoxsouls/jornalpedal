@@ -3,5 +3,5 @@ south
 psycopg2
 bpython
 PIL
-django-imagekit
+django-imagekit==2.0.2
 raven
