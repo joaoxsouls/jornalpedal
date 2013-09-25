@@ -141,7 +141,12 @@ INSTALLED_APPS = (
     'pedal.apps.ads',
     'south',
     'imagekit',
+    'staticassets'
 )
+
+STATICFILES_STORAGE = 'staticassets.storage'
+
+STATICASSETS_MANIFESTS = ('css/application',)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

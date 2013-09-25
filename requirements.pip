@@ -5,3 +5,4 @@ bpython
 PIL
 django-imagekit==2.0.2
 raven
+django-staticassets
