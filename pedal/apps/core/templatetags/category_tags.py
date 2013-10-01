@@ -6,7 +6,7 @@ register = template.Library()
 
 
 @register.tag(name="category_list")
-def do_category_list(parse, token):
+def do_category_list(parser, token):
     tokens = token.split_contents()
     error_msg = ("%r tag uses the following syntax: {%% category_list as categories %%}" % tokens[0])
     if tokens[1] != 'as':
