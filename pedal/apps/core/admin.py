@@ -12,8 +12,11 @@ from .models import Post, Image, Category
 class ImageCustomFormset(BaseInlineFormSet):
 
     def clean(self):
-        images = [image_form for image_form in self.forms if hasattr(image_form, 'cleaned_data') and 'highlight' in image_form.cleaned_data and image_form.cleaned_data['highlight']]
-        if not images or len(images) > 1:
+        images = [image_form for image_form in self.forms
+                  if hasattr(image_form, 'cleaned_data')
+                  and 'highlight' in image_form.cleaned_data
+                  and image_form.cleaned_data['highlight']]
+        if len(images) != 1:
             raise ValidationError(_('Post must have one image highlight'))
         super(ImageCustomFormset, self).clean()
 

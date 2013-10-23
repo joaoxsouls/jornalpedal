@@ -13,5 +13,5 @@ urlpatterns = patterns('',
     url(r'^pedal/$', views.AboutPage.as_view(), name='about'),
     url(r'^loja/$', RedirectView.as_view(url='http://www.jornalpedal.bigcartel.com/'), name='shop'),
     url(r'^(?P<category>[a-z]+)/(?P<slug>[-\w]+)/$', views.PostDetailView.as_view(), name='post_detail'),
-    url(r'^(?P<category>[a-z]+)/$', views.PostListView.as_view(), name='post_listing'),
+    url(r'^(?P<category>[-\w]+)/$', views.PostListView.as_view(), name='post_listing'),
 )

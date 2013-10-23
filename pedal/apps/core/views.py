@@ -14,8 +14,11 @@ class SideBarContentMixin(object):
 
     def get_context_data(self, **kwargs):
         ctx = super(SideBarContentMixin, self).get_context_data(**kwargs)
-        ctx['aid'] = Ad.objects.filter(highlight=True)[0]
-        ctx['edition'] = Edition.objects.filter(highlight=True)[0]
+        # avoid indexerror exceptions in case element doesn't exist
+        ad = Ad.objects.filter(highlight=True)[:1]
+        ctx['ad'] = ad[0] if ad else None
+        edition = Edition.objects.filter(highlight=True)[:1]
+        ctx['edition'] = edition[0] if edition else None
         return ctx
 
 
@@ -72,7 +75,8 @@ class PostListView(SideBarContentMixin, PaginatorMixin, ListView):
         category = self.kwargs['category']
         queryset = Post.objects.filter(category__slug=category).order_by('-pub_date').prefetch_related('images').select_related('category')
         for post in queryset:
-            post.thumbnail_image = post.images.all()[0].thumbnail.url
+            image = post.images.all()[:1]
+            post.thumbnail_image = image[0].thumbnail.url if image else None
         return queryset
 
     def get_context_data(self, **kwargs):
